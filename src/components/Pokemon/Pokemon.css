@@ -1,0 +1,13 @@
+.parent-poke {
+  /* This is the container for a single Pokemon component */
+  border: 1px solid #ccc; /* Adds a border to each pokemon card */
+  border-radius: 8px; /* Rounds the corners */
+  padding: 10px; /* Adds space inside the card */
+  margin: 5px; /* Adds space between each card */
+  display: flex; /* Makes the name and image align horizontally */
+  flex-direction: column; /* Stacks the name and image vertically */
+  align-items: center; /* Centers the items horizontally */
+  width: 150px; /* Sets a fixed width for each card */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
