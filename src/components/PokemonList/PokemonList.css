@@ -1,6 +1,11 @@
 
 .pokemon-list-wrapper{
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 .pokemon-container {
@@ -10,3 +15,49 @@
   gap: 15px; 
   padding: 20px;
 }
+
+.btn-control {
+            display: flex;
+            gap: 16px; /* Equivalent to Tailwind's space-x-4 (16px) */
+        }
+
+        .btn-control button {
+            padding: 12px 24px; /* Equivalent to Tailwind's px-6 py-3 */
+            font-weight: 600; /* Semi-bold text */
+            border-radius: 8px; /* Equivalent to Tailwind's rounded-lg */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Equivalent to Tailwind's shadow-md */
+            border: none; /* Remove default button border */
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            color: #ffffff; /* White text */
+        }
+
+        .btn-control button:focus {
+            outline: none; /* Remove default focus outline */
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); /* Blue ring for focus */
+        }
+
+        /* Specific styles for the Previous button */
+        .btn-control .previous-btn {
+            background-color: #2563eb; /* Blue-600 */
+        }
+
+        .btn-control .previous-btn:hover {
+            background-color: #1d4ed8; /* Blue-700 */
+        }
+
+        /* Specific styles for the Next button */
+        .btn-control .next-btn {
+            background-color: #16a34a; /* Green-600 */
+        }
+
+        .btn-control .next-btn:hover {
+            background-color: #15803d; /* Green-700 */
+        }
+
+        .btn-control button:disabled {
+            opacity: 0.6; /* Reduce opacity to indicate disabled state */
+            cursor: not-allowed; /* Change cursor to 'not-allowed' */
+            box-shadow: none; /* Remove shadow for a flatter look */
+            background-color: #cccccc; /* Grey background for disabled buttons */
+        }
