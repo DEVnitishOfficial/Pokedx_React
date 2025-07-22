@@ -337,8 +337,6 @@ useEffect(() => {
 
 This ensures your app reacts dynamically to user actions and updates the displayed data accordingly.
 
----
-
 ## 🧠 Summary of Key Concepts
 
 | Feature             | Description                                                 |
@@ -348,8 +346,165 @@ This ensures your app reacts dynamically to user actions and updates the display
 | `onClick`           | Updates the URL based on user interaction                   |
 | `useEffect`         | Triggers data re-fetching whenever the `pokedexUrl` changes |
 
----
 
 ## ✅ Final Result
 
 We now have working **pagination buttons** that allow users to browse through all available Pokémon in batches of 20 — just like in a real Pokédex!
+
+
+# 🧭 Goal: Display Each Pokémon Detail on a Separate Route using `react-router-dom`
+
+In this section, we enhance our Pokédex by displaying each Pokémon’s detailed information on a **dedicated route/page** using `react-router-dom`.
+
+---
+
+## 🚦 Step 1: Enable Routing in a React Application
+
+1. **Install `react-router-dom`:**
+
+```bash
+npm install react-router-dom
+```
+
+2. **Wrap Your App in `<BrowserRouter>`**
+
+Update your `main.jsx` file like this:
+
+```js
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+```
+
+> ✅ This makes all routing features available across the application.
+
+---
+
+## 🧭 Step 2: Define Routes in a Central File
+
+* Create a folder named `routes` inside `src/`.
+* Create a file `CustomRoutes.jsx` inside the `routes` folder.
+
+### 📁 `CustomRoutes.jsx`
+
+```js
+import { Routes, Route } from 'react-router-dom';
+import Pokedex from '../components/Pokedex';
+import PokemonDetails from '../components/PokemonDetails';
+
+function CustomRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Pokedex />} />
+      <Route path="/pokemon/:id" element={<PokemonDetails />} />
+    </Routes>
+  );
+}
+
+export default CustomRoutes;
+```
+
+### 📁 In `App.jsx`
+
+Render your route manager:
+
+```js
+import CustomRoutes from './routes/CustomRoutes';
+
+function App() {
+  return <CustomRoutes />;
+}
+```
+
+---
+
+## 🔗 Step 3: Make Pokémon Clickable Without Page Refresh
+
+* **Avoid using `<a href="...">`** which causes a full-page reload.
+* Instead, use React Router's `<Link>` component for client-side routing.
+
+### 🧩 Example:
+
+```jsx
+import { Link } from 'react-router-dom';
+
+<Link to={`/pokemon/${pokemon.id}`}>
+  <img src={pokemon.image} alt={pokemon.name} />
+  <p>{pokemon.name}</p>
+</Link>
+```
+
+> 🔄 This maintains SPA behavior by navigating without refreshing the browser.
+
+---
+
+## 📦 Step 4: Use `useParams()` to Extract Pokémon ID
+
+* Inside the Pokémon details page, use the `useParams` hook to extract the `id` from the URL.
+
+### 🧬 `PokemonDetails.jsx`
+
+```js
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+function PokemonDetails() {
+  const { id } = useParams();
+  const [pokemon, setPokemon] = useState({});
+
+  async function downloadPokemon() {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    setPokemon({
+      name: response.data.name,
+      image: response.data.sprites.other.dream_world.front_default,
+      height: response.data.height,
+      weight: response.data.weight,
+      type: response.data.types.map((t) => t.type.name),
+    });
+  }
+
+  useEffect(() => {
+    downloadPokemon();
+  }, []);
+
+  return (
+    <div className="pokemon-details">
+      <h2>{pokemon.name}</h2>
+      <img src={pokemon.image} alt={pokemon.name} />
+      <p><strong>Height:</strong> {pokemon.height}</p>
+      <p><strong>Weight:</strong> {pokemon.weight}</p>
+      <p><strong>Types:</strong> {pokemon.type?.join(', ')}</p>
+    </div>
+  );
+}
+
+export default PokemonDetails;
+```
+
+---
+
+## 🎨 Step 5: Style the Pokémon Detail Page
+
+You can now use CSS to style the detail page beautifully by targeting the `.pokemon-details` class and its children.
+
+---
+
+## ✅ Summary
+
+| Feature               | Description                                              |
+| --------------------- | -------------------------------------------------------- |
+| `react-router-dom`    | Enables routing between pages                            |
+| `<BrowserRouter>`     | Provides routing context to the entire app               |
+| `<Routes>`, `<Route>` | Define different pages and their components              |
+| `<Link to="...">`     | Client-side navigation without full page reload          |
+| `useParams()`         | Extract route parameters like `id` for dynamic rendering |
+
+---
+

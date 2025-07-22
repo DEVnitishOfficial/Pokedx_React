@@ -1,0 +1,54 @@
+.t-body {
+            font-family: "Inter", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Soft light background */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+.pokemon-detail-wrapper {
+            background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%); /* Subtle gradient background */
+            border-radius: 20px; /* More rounded corners for a softer look */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Deeper, softer shadow */
+            padding: 30px;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center items horizontally within the card */
+            text-align: center; /* Center text */
+            max-width: 350px; /* Max width for responsiveness */
+            width: 100%; /* Ensure it takes full width up to max-width */
+            border: 1px solid #e2e8f0; /* Subtle border */
+            transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+        }
+
+        .pokemon-detail-wrapper:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        /* Styles for the Pokémon name */
+        .poke-name {
+            font-size: 2.2em; /* Larger font size */
+            font-weight: 800; /* Extra bold */
+            color: #334155; /* Darker text color */
+            margin-bottom: 20px;
+            text-transform: capitalize; /* Capitalize the first letter */
+            letter-spacing: -0.5px; /* Slightly tighter letter spacing */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
+        }
+
+        /* Styles for the Pokémon image */
+        .pokemon-detail-wrapper img {
+            width: 180px; /* Fixed width for the image */
+            height: 180px; /* Fixed height for the image */
+            object-fit: contain; /* Ensure the image fits without cropping */
+            border-radius: 50%; /* Circular image */
+            border: 5px solid #60a5fa; /* Vibrant blue border around the image */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Shadow for the image */
+            margin-bottom: 25px;
+            background-color: #ffffff; /* White background behind the image */
+            padding: 5px; /* Padding inside the circular border */
+        }
