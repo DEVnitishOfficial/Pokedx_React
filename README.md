@@ -508,3 +508,91 @@ You can now use CSS to style the detail page beautifully by targeting the `.poke
 
 ---
 
+# 🧹 Goal: Refactor and Optimize State Management using a Single Object
+
+In our Pokémon project, we initially maintained **multiple individual state variables** to handle various aspects of the Pokémon list. While this approach works, it can become difficult to manage and prone to bugs when multiple updates happen in sequence.
+
+---
+
+## 🔧 Problem: Too Many Individual State Variables
+
+### Original State Setup:
+
+```js
+const [pokemonList, setPokemonList] = useState([]);
+const [loading, setIsLoading] = useState(true);
+const [pokedexUrl, setPokedexUrl] = useState("https://pokeapi.co/api/v2/pokemon");
+const [prevUrl, setPrevUrl] = useState('');
+const [nextUrl, setNextUrl] = useState('');
+```
+
+### 😟 Drawbacks:
+
+* Multiple related states are split, making code harder to reason about.
+* Sequential updates can lead to **inconsistent or stale state**, especially if React batches updates.
+* Difficult to perform **atomic updates** when states depend on each other.
+
+---
+
+## ✅ Solution: Use a Single Object in `useState`
+
+Instead of multiple state variables, you can consolidate everything into **one object**:
+
+### 💡 Refactored State Setup:
+
+```js
+const [pokemonListState, setPokemonListState] = useState({
+  pokemonList: [],
+  loading: true,
+  pokedexUrl: 'https://pokeapi.co/api/v2/pokemon',
+  prevUrl: '',
+  nextUrl: ''
+});
+```
+
+Now all Pokémon-related state is stored and updated via a **single source of truth**.
+
+---
+
+## 🧪 Updating State Safely with Functional Form
+
+When updating a state object, **never overwrite it directly**. Instead, use the **functional updater form** of `setState()` to ensure you're working with the most recent version of state.
+
+### ❌ Buggy Approach (Overwrites state incorrectly):
+
+```js
+// This will discard other properties like pokemonList and pokedexUrl
+setPokemonListState({
+  nextUrl: response.data.next,
+  prevUrl: response.data.previous
+});
+
+setPokemonListState({
+  pokemonList: pokemonProp,
+  loading: false
+});
+```
+
+### ✅ Correct Approach Using Functional Updater:
+
+```js
+setPokemonListState((state) => ({
+  ...state,
+  nextUrl: response.data.next,
+  prevUrl: response.data.previous
+}));
+
+setPokemonListState((state) => ({
+  ...state,
+  pokemonList: pokemonProp,
+  loading: false
+}));
+```
+
+> 🔁 This ensures that updates are **queued properly** and based on the latest state snapshot.
+
+Read the below react article for more clarity : 
+
+https://react.dev/learn/queueing-a-series-of-state-updates
+
+
