@@ -596,3 +596,12 @@ Read the below react article for more clarity :
 https://react.dev/learn/queueing-a-series-of-state-updates
 
 
+# Now our Next goal is to using the customHook for segregating the business logic from the ui logic like downloading the pokemon and setting their state etc.
+
+* Firstly i have created the hooks folder in component and then created file usePokemonList.jsx 
+where we will write the business logic which is different from the ui.
+
+
+
+
+
