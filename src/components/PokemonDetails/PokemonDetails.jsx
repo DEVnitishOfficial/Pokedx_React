@@ -1,34 +1,42 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './PokemonDetail.css'
+import usePokemonDetails from "../hooks/usePokemonDetails";
 
 function PokemonDetails(){
-    const {id} = useParams()
-    const [pokemon, setPokemon] = useState({})
-    async function downloadPokemon(){
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-        setPokemon({
-            name : response.data.name,
-            image : response.data.sprites.other.dream_world.front_default,
-            height : response.data.height,
-            weight : response.data.weight,
-            type : response.data.types.map((t) => t.type.name )
-        })
-    }
-    useEffect(() => {
-        downloadPokemon();
-    },[])
+     const {id} = useParams()
+  const [pokemons] = usePokemonDetails(id);
+
+   console.log("seee my pokeeee", pokemons.similarPokemons);
+
 
     return(
         <div className="t-body"> 
         <div className="pokemon-detail-wrapper">
-            <div className="poke-name"> Name : {pokemon.name} </div>
-            <div><img src={pokemon.image} /></div>
-            <div>Height : <span> {pokemon.height} </span></div>
-            <div>weight : <span> {pokemon.weight} </span></div>
-            <div>Type : <span> {pokemon.type} </span> </div>
+            <div className="poke-name"> Name : {pokemons.name} </div>
+            <div><img src={pokemons.image} /></div>
+            <div>Height : <span> {pokemons.height} </span></div>
+            <div>weight : <span> {pokemons.weight} </span></div>
+            <div>Type : <span> {pokemons.types} </span> </div>
+
+           
+
         </div>
+        {pokemons.types &&(
+             <div className="pokemon-type-wrapper">
+            <h4>More {pokemons.types} type pokemon</h4>
+            <div className="pokemon-type-name">
+            <ul>
+                 {pokemons.similarPokemons.map((p) => <li key={p.pokemon.url}>{p.pokemon.name}</li>)}
+            </ul>
+
+                
+
+                </div>
+                
+
+            </div>
+         )}
+        
         </div>
     )
 }

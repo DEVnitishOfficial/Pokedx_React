@@ -1,6 +1,7 @@
 .t-body {
             font-family: "Inter", sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -52,3 +53,69 @@
             background-color: #ffffff; /* White background behind the image */
             padding: 5px; /* Padding inside the circular border */
         }
+
+.pokemon-type-wrapper {
+    width: 100%;
+    max-width: 700px; /* Adjust max-width for this section */
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px; /* Space above this section */
+}
+
+.pokemon-type-wrapper h4 {
+    font-size: 1.8em;
+    color: #334155;
+    margin-bottom: 20px;
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0; /* Subtle separator */
+    padding-bottom: 15px;
+}
+
+/* Styles for the list of Pokémon names */
+.pokemon-type-name ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0; /* Space below the list of names */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pokemon-type-name ul li {
+    background-color: #e0f2fe; /* Light blue background */
+    color: #0c4a6e; /* Darker blue text */
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    text-transform: capitalize;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Small shadow for list items */
+}
+
+/* Styles for the grid of Pokémon images */
+.pokemon-type-image {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive grid for images */
+    gap: 15px;
+    justify-items: center; /* Center images within their grid cells */
+    padding-top: 10px; /* Space above images */
+}
+
+.pokemon-type-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 10px; /* Slightly rounded corners for images */
+    border: 2px solid #cbd5e1; /* Light grey border */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.pokemon-type-image img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}

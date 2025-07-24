@@ -603,5 +603,11 @@ where we will write the business logic which is different from the ui.
 
 
 
+### Our next goal is to find the similir type of pokemons like if we have type fire the similir to fire there are a lot of pokemon, we have to fetch all that.
+
+we have fetched the all type of pokemon there is nothing to much to learn in this part the main things were how you make you own custom hook and seperate you business logic from the ui.
+
+
+
 
 
